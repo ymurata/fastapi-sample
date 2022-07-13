@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from repositories.status import StatusRepository, StatusRepositoryImpl
+from repository import StatusRepository, StatusRepositoryImpl, StatusRepositoryDummy
 
 
 class StatusServce(ABC):
@@ -18,8 +18,14 @@ class StatusServceImpl(StatusServce):
         return self.repo.find()
 
 
-# これを Dpends する
+# FastAPI 起動時に dependency_overrides に代入する
 def status_service() -> StatusServce:
     repo = StatusRepositoryImpl()
+    service = StatusServceImpl(repo)
+    return service
+
+
+def status_service_dummy() -> StatusServce:
+    repo = StatusRepositoryDummy()
     service = StatusServceImpl(repo)
     return service
