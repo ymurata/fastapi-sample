@@ -36,7 +36,6 @@ def get_user(_: Request, user_id: int, usecase: UserUsecase = Depends(UserUsecas
 
 @router.post("/users", response_model=UserResponse)
 def create_user(_: Request, data: CreateUser, usecase: UserUsecase = Depends(UserUsecase)) -> UserResponse:
-    print(data)
     user = usecase.create_user(create_user=data)
     return UserResponse(user=user)
 
