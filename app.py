@@ -1,18 +1,12 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 
-import controller
-from service import StatusServce, status_service, status_service_dummy
+from injector import user_usecase
+from usecases.user_usecase import UserUsecase
+from presenters.controllers import user_controller
 
 
 def main() -> FastAPI:
     app = FastAPI()
-    app.include_router(controller.router)
-    app.dependency_overrides[StatusServce] = status_service
-    return app
-
-
-def dummy() -> FastAPI:
-    app = FastAPI()
-    app.include_router(controller.router)
-    app.dependency_overrides[StatusServce] = status_service_dummy
+    app.include_router(user_controller.router)
+    app.dependency_overrides[UserUsecase] = user_usecase
     return app

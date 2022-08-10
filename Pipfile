@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+peewee = "*"
+install = "*"
+peewee-migrate = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
